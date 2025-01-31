@@ -59,6 +59,10 @@ function getTutorialLinks(messages) {
     return links;
 }
 
+app.get('/', (req, res) => {
+    res.redirect('https://github.com/JuniorSchueller/PD-API');
+});
+
 app.get('/api/scripts', async (req, res) => {
     try {
         const scriptThreadsResponse = await fetch(`https://discord.com/api/v10/channels/${SCRIPTS_ID}/threads/search?name=&tag_setting=match_some`, {
