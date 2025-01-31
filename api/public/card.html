@@ -1,0 +1,146 @@
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        Profile Card
+    </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #3e008a, #24004f);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .card {
+            background-color: #1e0333;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+            color: white;
+            padding-bottom: 20px;
+            /* Removemos o padding-top para o banner encostar */
+            overflow: hidden;
+            /* Garante que o banner respeite os cantos arredondados */
+            position: relative;
+            /* Garante que os elementos filhos respeitem os limites */
+        }
+
+        .card img.header-img {
+            width: 100%;
+            /* Agora ocupa toda a largura da .card */
+            height: 120px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            display: block;
+            /* Remove espaços extras abaixo da imagem */
+        }
+
+        .card img.profile-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-top: -40px;
+            border: 3px solid #1e0333;
+            background-color: #ffffff62;
+        }
+
+        .card h2 {
+            margin: 10px 0 5px;
+            font-size: 24px;
+        }
+
+        .card h3 {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+
+        .margin {
+            margin-bottom: 36px;
+        }
+
+        .card p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #b0b0b0;
+        }
+
+        .card a {
+            color: #0085b9;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .card a:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <img class="header-img" id="banner" src="https://placehold.co/300x120" />
+        <img class="profile-img" id="avatar" src="https://placehold.co/80" />
+        <h2 id="name">John Doe</h2>
+        <h3 id="role">Entrosa</h3>
+        <div class="margin"></div>
+        <p>Destroyer desde <span id="joined"></span></p>
+        <a href="https://discord.gg/platformdestroyer">Platform Destroyer</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            function formatTimestamp(isoString) {
+                const date = new Date(isoString);
+
+                const day = String(date.getUTCDate()).padStart(2, '0');
+                const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+                const year = date.getUTCFullYear();
+                const hours = String(date.getUTCHours()).padStart(2, '0');
+                const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+
+                return `${day}/${month}/${year} ${hours}:${minutes}`;
+            }
+
+            const bannerElement = document.querySelector('#banner');
+            const avatarElement = document.querySelector('#avatar');
+            const nameElement = document.querySelector('#name');
+            const roleElement = document.querySelector('#role');
+            const joinedElement = document.querySelector('#joined');
+
+            const urlSearchParams = new URLSearchParams(location.search);
+            const id = urlSearchParams.get('id') || '546530576019095583';
+
+            const DEFAULT_BANNER =
+                'https://cdn.discordapp.com/splashes/1024794781324419094/f3ed8831b5e2c4ff9cdbdbb849e60b77.jpg?size=1024';
+            const DEFAULT_AVATAR =
+                'https://cdn.discordapp.com/icons/1024794781324419094/a_b2b593c2fe448e93971b105f122f2ba3.webp?size=60';
+
+            const userResponse = await fetch(`https://pdapi.vercel.app/api/user/${id}`);
+            const userInfo = await userResponse.json();
+
+            bannerElement.src = userInfo.banner || DEFAULT_BANNER;
+            avatarElement.src = userInfo.avatar || DEFAULT_AVATAR;
+
+            nameElement.innerText = userInfo.nick || userInfo.globalName || 'John Doe';
+            nameElement.style.color = userInfo.role.color || 'Entrosa';
+
+            roleElement.innerText = userInfo.role.name;
+            roleElement.style.color = userInfo.role.color;
+            roleElement.setAttribute('title', userInfo.role.id);
+
+            joinedElement.innerText = formatTimestamp(userInfo.joinedAt);
+        });
+    </script>
+</body>
+
+</html>

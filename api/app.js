@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const { USER_TOKEN, PD_ID, SCRIPTS_ID, TUTORIALS_ID } = {
@@ -13,6 +14,9 @@ const { USER_TOKEN, PD_ID, SCRIPTS_ID, TUTORIALS_ID } = {
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static(path.join(__dirname, '/public/'), {
+    extensions: ['html']
+}));
 
 function getScriptURL(messages) {
     const message = messages.find(msg => msg.components.length > 0);

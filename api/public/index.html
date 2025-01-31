@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Perfil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #3e008a, #24004f);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            background-color: #1e0333;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 22px;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #0085b9;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #006b92;
+        }
+
+        .terms {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #b0b0b0;
+        }
+
+        .terms a {
+            color: #0085b9;
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Insira o ID do usuário</h1>
+        <input type="text" id="userId" placeholder="Digite o ID">
+        <button onclick="redirectToCard()">Buscar</button>
+        <p class="terms">Ao clicar em Buscar você concorda com os <a href="./TERMS.md">Termos de Uso</a> e <a href="./PRIVACY.md">Política de Privacidade</a>.</p>
+    </div>
+
+    <script>
+        function redirectToCard() {
+            const userId = document.getElementById('userId').value.trim();
+            if (userId) {
+                window.location.href = `card?id=${userId}`;
+            } else {
+                alert('Por favor, insira um ID válido.');
+            }
+        }
+    </script>
+</body>
+</html>
+
