@@ -1,0 +1,18 @@
+{
+  "name": "pdapi-wrapper",
+  "version": "1.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "keywords": [
+    "pd",
+    "platform",
+    "destroyer",
+    "api",
+    "wrapper"
+  ],
+  "author": "JuniorSchueller",
+  "license": "MIT",
+  "description": "An API Wrapper for PD-API."
+}
