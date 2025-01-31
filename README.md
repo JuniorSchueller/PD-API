@@ -34,7 +34,7 @@ The **`PD-API`** is an Express-based API that integrates with Discord and expose
 For detailed API documentation, check the respective `README.md` files inside the **`api`** and **`pdapi-wrapper`** folders.
 
 - **[PD-API README](api/README.md)**
-- **[pdapi-wrapper README](pdapi-wrapper/README.md)**
+- **[pdapi-wrapper README](lib/README.md)**
 
 ---
 
