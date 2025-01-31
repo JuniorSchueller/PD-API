@@ -91,7 +91,7 @@ getGuildInfo()
 The API interacts with the following base URL:
 
 ```
-https://pd-api.vercel.app
+https://pdapi.vercel.app
 ```
 
 ## 💬 Contributions
