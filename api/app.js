@@ -27,7 +27,7 @@ function getScriptURL(messages) {
 
     const button = message.components
         .flatMap(component => component.components)
-        .find(button => button.label === 'Script');
+        .find(button => button.label.toLower().includes('script'));
 
     return button ? button.url : null;
 }
